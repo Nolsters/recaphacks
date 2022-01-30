@@ -1,2 +1,3 @@
 scripts/vault.py
 .DS_Store
+.env
