@@ -1,1 +1,1 @@
-heroku ps:scale worker=1
+web: pip install -r requirements.txt && npm start
