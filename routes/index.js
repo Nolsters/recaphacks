@@ -26,13 +26,17 @@ router.get('/home', function(req, res, next){
 });
 
 router.post('/youtubeUpload', function(req, res, next){
-  var youtubeLink = req.youtube;
+  console.log(req.body.youtube)
+  var youtubeLink = req.body.youtube;
   const spawn = require("child_process").spawn;
-  const pythonProcess = spawn('python',["../scripts/speech.py", youtubeLink]);
-  pythonProcess.stdout.on('data', (data) => {
-    res.send(data)
-  });
-  
+  const pythonProcess = spawn('python',[path.join(__dirname, '../scripts/speech.py'), youtubeLink]);
+  pythonProcess.stdout.on('data', function (data) {
+    console.log('Pipe data from python script ...');
+    dataToSend = data.toString();
+    console.log(dataToSend)
+    res.send(dataToSend)
+   });
+   // in close event we are sure that stream from child process is closed
 })
 
 module.exports = router;
