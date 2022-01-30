@@ -18,6 +18,7 @@ router.post('/youtubeUpload', function(req, res, next){
   var youtubeLink = req.body.youtube;
   const spawn = require("child_process").spawn;
   const pythonProcess = spawn('python',[path.join(__dirname, '../scripts/speech.py'), youtubeLink]);
+  console.log('Process Spawned')
   pythonProcess.stdout.on('data', function (data) {
     console.log('Pipe data from python script ...');
     dataToSend = data.toString();
